@@ -77,3 +77,10 @@ Para correr tu primer contenedor:
 `docker run hello-world`
 Este comando solo arroja el siguiente texto
 <img src="https://static.platzi.com/media/user_upload/docker_run-4a1c7a71-25c7-4c35-a996-522dd2cc5345.jpg" />
+
+### Conceptos fundamentales de docker: CONTENEDORES
+
+Un contenedor es una MV liviana, es una agrupación de procesos que corre nativamente en la máquina pero estan aislados del resto del sistema, es una unidad lógica, por eso puede correr de forma nativa en la maquina anfitriona.
+El contenedor esta limitado a que cosas puede ver o acceder del anfitrión. Esto es configurable.
+
+
