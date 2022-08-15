@@ -62,12 +62,18 @@ Es una sesion en la nube que se puede usar por 4 horas.
 * Creamos una instancia. Abre una terminal nueva.
 
 ### Qué es y cómo funciona Docker.
-<img src="https://ualmtorres.github.io/SeminarioDockerPresentacion/images/DockerEngine.png"
+<img src="https://ualmtorres.github.io/SeminarioDockerPresentacion/images/DockerEngine.png"/>
 
 * `docker daemon` Corazón de docker o servidor de docker. 
 * `REST API` Para comunicarse con el mundo exterior o localmente. Es posible exponer el docker daemon **No es recomedable pero es posible**
 * `docker-cli` cliente de docker para terminal, habla con el docker daemon. 
 * `contenedores` Lo mas importante, donde van a correr nuestras aplicaciones.
 * `imagenes` Artefactos que usa docker para empaquetar contendores, para poder distribuir
-* `volumenes de datos` Es la forma en la que docker nos permite acceder de manera segura y flexible a el sistema de archivos de la maquina anfitriona.
+*LOUF5sqix7nuct*rauhLOUF5sqix7nuct*rauh `volumenes de datos` Es la forma en la que docker nos permite acceder de manera segura y flexible a el sistema de archivos de la maquina anfitriona.
 * `network` Le permite a los distintos contenedores de docker entre si o con el mundo exterior.
+
+### Primeros pasos: Hola mundo
+Para correr tu primer contenedor:
+`docker run hello-world`
+Este comando solo arroja el siguiente texto
+<img src="https://static.platzi.com/media/user_upload/docker_run-4a1c7a71-25c7-4c35-a996-522dd2cc5345.jpg" />
