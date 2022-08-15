@@ -78,9 +78,30 @@ Para correr tu primer contenedor:
 Este comando solo arroja el siguiente texto
 <img src="https://static.platzi.com/media/user_upload/docker_run-4a1c7a71-25c7-4c35-a996-522dd2cc5345.jpg" />
 
-### Conceptos fundamentales de docker: CONTENEDORES
+### Conceptos fundamentales de Docker: CONTENEDORES
 
 Un contenedor es una MV liviana, es una agrupación de procesos que corre nativamente en la máquina pero estan aislados del resto del sistema, es una unidad lógica, por eso puede correr de forma nativa en la maquina anfitriona.
 El contenedor esta limitado a que cosas puede ver o acceder del anfitrión. Esto es configurable.
 
-
+### Comprendiendo el estado de Docker
+```bash
+#Correr el contenedor hello-world
+docker run hello-world
+#Muestra los contenedores ACTIVOS
+docker ps
+#Muestra TODOS los contenedores
+docker ps -a
+#Muestra el detalle de un contedor por el ID
+docker inspect f6bf25fd84ac
+#Muestra el detalle de un contedor por el NAME
+docker inspect vibrant_goldwasser
+#Asigna un nombre a el contenedor hello world
+docker run --name hello-platzi hello-world 
+#Cambio de nombre al contenedor
+docker rename hello-platzi hola-platzi
+#Elimina el contenedor hola-platzi
+docker rm hola-platzi
+#Borro todos los contenedores en un solo comando
+docker container prune
+```
+> Docker no permite correr dos contenedores con el mismo `NAME`
