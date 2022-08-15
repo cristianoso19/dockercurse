@@ -127,3 +127,27 @@ Para que no se cierre el contenedor sin entrar al modo interactivo.
 > Mientras el proceso principal este corriendo el contenedor estara corriendo
 * Para matar el proceso se busca el process id 
 `docker kill alwaysup`
+### Exponiendo contenedores
+Para exponer el contenedor al sistema exterior.
+```bash
+#Desplegar nginx en docker
+$ docker run -d --name proxy nginx 
+#Para el contenedor
+$ docker stop proxy 
+#Borra el contenedor
+$ docker rm proxy
+#Para pararar y borrar el contenedor
+$ docker rm -f <contenedor> 
+#Desplegar nginx y exponerlo en el puerto 8080, ANFITRION:CONTENEDOR
+$ docker run -d --name proxy -p 8080:80 nginx 
+#Acceder desde el navegador
+localhost:8080 
+#Ver los logs
+$ docker logs proxy
+#Follow a los logs
+$ docker logs -f proxy 
+#Follow de los 10 ultimos logs
+$ docker logs --tail 10 -f proxy 
+
+```
+
