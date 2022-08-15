@@ -115,3 +115,15 @@ cat /etc/lsb_release
 # Salir del terminal del contenedor
 exit
 ```
+### Ciclo de vida de un contenedor.
+Cada vez que un contenedor se ejecuta, se ejecuta un proceso del sistema operativo.
+* Un contenedor solo funciona mientras este "vivo" su proceso principal (en el caso de ubutu es bash).
+> Es importante cuando el MAIN PROCESS falla o se detiene el contenedor tambien para.
+Para que no se cierre el contenedor sin entrar al modo interactivo.
+`docker run --name alwaysup -d ubuntu tail -f /dev/null`
+* Al final se especifica el comando que quiero que se ejecute
+* Ahora para conectarse a un contenedor que esta corriendo
+`docker exec -it alwaysup bash`
+> Mientras el proceso principal este corriendo el contenedor estara corriendo
+* Para matar el proceso se busca el process id 
+`docker kill alwaysup`
