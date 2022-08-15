@@ -105,3 +105,13 @@ docker rm hola-platzi
 docker container prune
 ```
 > Docker no permite correr dos contenedores con el mismo `NAME`
+### Modo interactivo
+```bash
+# Correr ubuntu en modo interactivo 
+# -i=interactivo t= terminal tty
+docker run -it ubuntu bash
+# Ver la version del sistema operativo
+cat /etc/lsb_release
+# Salir del terminal del contenedor
+exit
+```
