@@ -154,7 +154,6 @@ $ docker logs --tail 10 -f proxy
 Los contenedores son entidades que no pueden acceder a los datos de la maquina anfitrion, a no ser que lo permitamos.
 > Existen casos en los que se necesita compartir archivos
 Esto se llama **BIND MOUNT** Y lo que hace es espejar todo lo que se encuentre de un directorio del contenedor en el directorio asignado en el anfitrion.
-> Tiene un riesgo, se da acceso a un contenedor a una parte del disco, puede ser peligroso.
 ```bash
 #Creo un directorio
 mkdir dockerdata 
@@ -172,4 +171,23 @@ mongo (me conecto a la BBDD)
 - use platzi ( creo la BBDD platzi)
 - db.users.insert({“nombre”:“guido”}) (inserto un nuevo dato)
 - db.users.find() (veo el dato que cargué)
-- $ docker run -d --name db -v <path de mi maquina>:<path dentro del contenedor(/data/db mongo)> (corro un contenedor de mongo y creo un bind mount)
+> Si listamos los archivos dentro de la carpeta docker data esta tendra varios archivos esto por que se todo el contenido del directorio contenedor fue linkeado o creado en el directorio anfitrión.
+
+> Tiene un riesgo, se da acceso a un contenedor a una parte del disco, puede ser peligroso.
+
+###Volumenes
+Es una evolución de los BIND MOUNT por problemas de seguridad o privacidad.
+Ya que no se sabe donde estan los archivos
+```bash
+#Listo todos los volumenes creados
+docker volume ls 
+#Creamos un nuevo volumen
+docker volume create dbdata
+#Desplegamos el contenedor, con --mount usara el volumen creado, se le debe especificar el destiono
+docker run -d --name db --mount src=dbdata,dst=/data/db mongo 
+#Podemos revisar todos los datos creados
+docker inspect db
+mongo 
+
+```
+Es una manera muy practica de compartir archivos entre contenedores sin compartir un directorio
