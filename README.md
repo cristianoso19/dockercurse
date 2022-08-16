@@ -149,5 +149,27 @@ $ docker logs -f proxy
 #Follow de los 10 ultimos logs
 $ docker logs --tail 10 -f proxy 
 
+## Datos en DOCKER
+### Bind mounts
+Los contenedores son entidades que no pueden acceder a los datos de la maquina anfitrion, a no ser que lo permitamos.
+> Existen casos en los que se necesita compartir archivos
+Esto se llama **BIND MOUNT** Y lo que hace es espejar todo lo que se encuentre de un directorio del contenedor en el directorio asignado en el anfitrion.
+> Tiene un riesgo, se da acceso a un contenedor a una parte del disco, puede ser peligroso.
+```bash
+#Creo un directorio
+mkdir dockerdata 
+#Despliego un contenedor -v para hacer el BIND MOUNT
+docker run -d --name db -v {DIRECTORIO_ANFITRION}:{DIRECTORIO_CONTENEDOR} mongo   
+#Revisamos el contenedor de nombre bd
+docker ps 
+#Entramos al bash del contenedor
+docker exec -it db bash (entro al bash del contenedor)
+#Ejecutamos el cli de MONGO.
+mongo (me conecto a la BBDD)
 ```
-
+#### Comandos usados de MONGODB
+- shows dbs (listo las BBDD)
+- use platzi ( creo la BBDD platzi)
+- db.users.insert({“nombre”:“guido”}) (inserto un nuevo dato)
+- db.users.find() (veo el dato que cargué)
+- $ docker run -d --name db -v <path de mi maquina>:<path dentro del contenedor(/data/db mongo)> (corro un contenedor de mongo y creo un bind mount)
