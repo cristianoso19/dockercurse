@@ -177,7 +177,7 @@ mongo (me conecto a la BBDD)
 
 ###Volumenes
 Es una evolución de los BIND MOUNT por problemas de seguridad o privacidad.
-Ya que no se sabe donde estan los archivos
+Es mas practico, no podemos acceder a esos archivos ya que cuando los datos estan en un volumen son accesibles para el contenedor asignado, no para un usuario nomral directamente.
 ```bash
 #Listo todos los volumenes creados
 docker volume ls 
@@ -185,9 +185,29 @@ docker volume ls
 docker volume create dbdata
 #Desplegamos el contenedor, con --mount usara el volumen creado, se le debe especificar el destiono
 docker run -d --name db --mount src=dbdata,dst=/data/db mongo 
-#Podemos revisar todos los datos creados
+#Podemos revisar toda la información con la que se creo el contenedor
 docker inspect db
 mongo 
 
 ```
-Es una manera muy practica de compartir archivos entre contenedores sin compartir un directorio
+Es una manera muy practica de compartir archivos entre contenedores sin compartir un directorio, es mas seguro.
+###Insertar y extraer archivos de un contenedor.
+Esta es otra forma de acceder a archivos del contenedor, indepeniente de que se use BIND MOUNT, volumenes o nada podamos ingresar o extraer datos de un contenedor
+> Esta operacion no importa si tiene BIND MOUNT O VOLUMENES
+<img src="https://i1.wp.com/cdn-images-1.medium.com/max/800/1*bo6IOrBjaHbtkPgTKT08NA.png?w=1170&ssl=1">
+`TMPFS Mount: Guarda los archivos temporalmente y persiste los datos en la memoria del contenedor, cuando muera sus datos mueren con el contenedor.`
+```bash
+#Crear un archivo de prueba
+touch prueba.txt 
+#Desplegamos ubuntu con el nombre copytest
+$ docker run -d --name copytest ubuntu tail -f /dev/null 
+#Ingresamos al contenedor
+$ docker exec -it copytest bash 
+#Creamos un contenedor dentro del contenedor
+$ mkdir /testing 
+#SUBIR un archivo al contenedor
+$ docker cp prueba.txt copytest:/testing/test.txt 
+#DESCARGAR un archivo del contenedor
+$ docker cp copytest:/testing localtesting 
+```
+> No hace falta que el contenedor este **CORRIENDO** para poder ingresar o sacar datos
