@@ -211,3 +211,20 @@ $ docker cp prueba.txt copytest:/testing/test.txt
 $ docker cp copytest:/testing localtesting 
 ```
 > No hace falta que el contenedor este **CORRIENDO** para poder ingresar o sacar datos
+
+##Imágenes
+
+###Conceptos fundamentes de imagenes docker
+Es la solución de docker a los problemas de construcción y distribución de software, son plantillas a partir de las cuales se puede crear contenedores.
+Es una pieza de software empaquetada de forma liviana que contiene todo lo necesario para que un contenedor pueda ejecutarse exitosamente, como dependencias, codigo, etc.
+> `docker image ls` la columna "TAG" es la version, en este caso la ultima.
+> Una imagen vive como si fuera un archivos o capas.
+> Docker se descarga las imagenes de https://hub.docker.com
+```bash
+#Revisar las imagenes disponibles localmente (instaladas)
+$ docker image ls
+#Instalar una versión especifica.
+$ docker pull ubuntu:20.04
+#Eliminar una imagen
+$ docker image rm -f {id_image}
+```
