@@ -175,7 +175,7 @@ mongo (me conecto a la BBDD)
 
 > Tiene un riesgo, se da acceso a un contenedor a una parte del disco, puede ser peligroso.
 
-###Volumenes
+### Volumenes
 Es una evolución de los BIND MOUNT por problemas de seguridad o privacidad.
 Es mas practico, no podemos acceder a esos archivos ya que cuando los datos estan en un volumen son accesibles para el contenedor asignado, no para un usuario nomral directamente.
 ```bash
@@ -191,7 +191,7 @@ mongo
 
 ```
 Es una manera muy practica de compartir archivos entre contenedores sin compartir un directorio, es mas seguro.
-###Insertar y extraer archivos de un contenedor.
+### Insertar y extraer archivos de un contenedor.
 Esta es otra forma de acceder a archivos del contenedor, indepeniente de que se use BIND MOUNT, volumenes o nada podamos ingresar o extraer datos de un contenedor
 > Esta operacion no importa si tiene BIND MOUNT O VOLUMENES
 <img src="https://i1.wp.com/cdn-images-1.medium.com/max/800/1*bo6IOrBjaHbtkPgTKT08NA.png?w=1170&ssl=1">
@@ -212,9 +212,9 @@ $ docker cp copytest:/testing localtesting
 ```
 > No hace falta que el contenedor este **CORRIENDO** para poder ingresar o sacar datos
 
-##Imágenes
+## Imágenes
 
-###Conceptos fundamentes de imagenes docker
+### Conceptos fundamentes de imagenes docker
 Es la solución de docker a los problemas de construcción y distribución de software, son plantillas a partir de las cuales se puede crear contenedores.
 Es una pieza de software empaquetada de forma liviana que contiene todo lo necesario para que un contenedor pueda ejecutarse exitosamente, como dependencias, codigo, etc.
 > `docker image ls` la columna "TAG" es la version, en este caso la ultima.
@@ -228,3 +228,62 @@ $ docker pull ubuntu:20.04
 #Eliminar una imagen
 $ docker image rm -f {id_image}
 ```
+
+### Construyendo una imagen propia
+Para esto usamos **DockerFile**, es un archivo que describe lo que pasara cuando se cree la imagen, con el comando **Build**.
+Una imagen es la plantilla para correr un contendor.
+> Desde una imagen podremos crear infintos contenedores
+* FROM: Siempre vamos a partir de algo mas.
+> Todo lo que se ejecuta en el docker file ocurre en el build.
+> Una imagen es un conjunto de **LAYERS** o capas, como un arbol de dependencias.
+```dockerfile
+#FROM: Empezar desde alguna imagen.
+FROM ubuntu:latest
+#RUN: corre en el build.
+RUN touch /usr/src/hola-platzi.txt
+```
+
+```bash
+#Crear una imagen propia
+docker build -t <base_img>:<tag_image_name> <Dockerfile context>
+docker build -t ubuntu:my_image .
+#Correr un contendor
+docker run -it ubuntu:my_image .
+#Iniciar sesion en docker hub
+docker login -u <username> -p 
+#Verificar el logeo
+cat ~/.docker/config.json
+#Retag para subir al repositorio
+docker tag ubuntu:my_image <username>/ubuntu:my_image
+#Subir la imagen
+docker push <username>/<image>:<tag>
+```
+### El sistema de capas
+Como ya sabemos una imagen es un conjunto de capas ordenadas.
+Es muy facil a partir de su dockerfile.
+> Las imagenes publicas tienen su dockerfile publico.
+La herramienta dive nos sirve para revisar cada capa de una imagen
+https://github.com/wagoodman/dive
+> tambien se puede correr en **Docker** con:. `docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest $IMAGE`
+La importancia de entender el sistema de capas consiste en la optimización de la construcción del contenedor para reducir espacio ya que cada comando en el dockerfile crea una capa extra de código en la imagen.
+
+Agregando Capas
+
+Con docker commit se crea una nueva imagen con una capa adicional que modifica la capa base.
+
+Ejemplo: crear una nueva imagen a partir de la imagen de Ubuntu.
+
+docker pull ubuntu
+
+docker images
+
+docker run -it cf0f3ca922e0 bin/bash
+
+(modificar el contenedor: Ej apt-get install nmap)
+
+docker commit deddd39fa163 ubuntu-nmap
+```bash
+$ docker history ubuntu:platzi (veo la info de como se construyó cada capa)
+$ dive ubuntu:platzi (veo la info de la imagen con el programa dive)
+```
+
