@@ -52,7 +52,7 @@ Pasos a seguir:
 * Crear cuenta en Docker Hub
 
 `docker --version`: Visualizar version de docker
-`docker info`: Visualizar información de docker`
+`docker info`: Visualizar información de docker
 ### Play with docker
 
 * Ir a https://labs.play-with-docker.com/
@@ -154,6 +154,7 @@ $ docker logs --tail 10 -f proxy
 Los contenedores son entidades que no pueden acceder a los datos de la maquina anfitrion, a no ser que lo permitamos.
 > Existen casos en los que se necesita compartir archivos
 Esto se llama **BIND MOUNT** Y lo que hace es espejar todo lo que se encuentre de un directorio del contenedor en el directorio asignado en el anfitrion.
+```
 ```bash
 #Creo un directorio
 mkdir dockerdata 
@@ -188,6 +189,21 @@ docker run -d --name db --mount src=dbdata,dst=/data/db mongo
 #Podemos revisar todos los datos creados
 docker inspect db
 mongo 
-
 ```
 Es una manera muy practica de compartir archivos entre contenedores sin compartir un directorio
+###Insertar y extraer datos de volumenes o contenedores.
+Es independiente si usamos bindmounts o volumenes
+```bash
+#Creamos un archivo 
+touch prueba.txt
+#Corremos un nuevo contenedor llamado copytest
+docker run -d --name copytest ubuntu tail -f /dev/null
+#Copiamos el archivo dentro del directorio testing del contenedor
+#y le cambiamos el nombre
+#PARA COPIAR DESDE LOCAL A CONTENEDOR 
+docker cp prueba.txt copytest:/testing/test.txt
+#PARA COPIAR DESDE CONTENEDOR AL LOCAL 
+docker cp copytest:/testing localtesting
+```
+>NO ES NECESARIO QUE EL CONTENEDOR ESTE CORRIENDO PARA COPIAR
+
