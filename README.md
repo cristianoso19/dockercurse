@@ -223,7 +223,8 @@ Contiene todo lo necesario para que pueda correr normalmente como:
 #Tag: version de la imagen, si no se especifica usa la "latest"
 #size: tamaño de la imagen
 docker image ls
-```
+```Familia de Cristian Sacta
 >Una imagen vive como un conjunto de archivos o "CAPAS"
 Para traer una imagen ejecutamos: 
 * docker pull ubuntu:20.04
+
