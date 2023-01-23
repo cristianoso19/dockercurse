@@ -207,3 +207,23 @@ docker cp copytest:/testing localtesting
 ```
 >NO ES NECESARIO QUE EL CONTENEDOR ESTE CORRIENDO PARA COPIAR
 
+##IMAGENES
+###CONCEPTOS FUNDAMENTALES DE DOCKER IMAGENES
+Es como intenta solucionar los dos problemas restantes
+>Construccion
+>Distribución
+>Las imagenes son plantillas a partir de las cuales se crean contenedores
+Contiene todo lo necesario para que pueda correr normalmente como:
+* Dependencias 
+* Codigo
+* Herramientas
+* Configuración
+```bash
+#Repository: El repositorio que se usa al ejecutar docker run
+#Tag: version de la imagen, si no se especifica usa la "latest"
+#size: tamaño de la imagen
+docker image ls
+```
+>Una imagen vive como un conjunto de archivos o "CAPAS"
+Para traer una imagen ejecutamos: 
+* docker pull ubuntu:20.04
