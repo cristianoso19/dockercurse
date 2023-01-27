@@ -176,7 +176,7 @@ mongo (me conecto a la BBDD)
 
 > Tiene un riesgo, se da acceso a un contenedor a una parte del disco, puede ser peligroso.
 
-###Volumenes
+### Volumenes
 Es una evolución de los BIND MOUNT por problemas de seguridad o privacidad.
 Ya que no se sabe donde estan los archivos
 ```bash
@@ -191,7 +191,7 @@ docker inspect db
 mongo 
 ```
 Es una manera muy practica de compartir archivos entre contenedores sin compartir un directorio
-###Insertar y extraer datos de volumenes o contenedores.
+### Insertar y extraer datos de volumenes o contenedores.
 Es independiente si usamos bindmounts o volumenes
 ```bash
 #Creamos un archivo 
@@ -207,12 +207,12 @@ docker cp copytest:/testing localtesting
 ```
 >NO ES NECESARIO QUE EL CONTENEDOR ESTE CORRIENDO PARA COPIAR
 
-##IMAGENES
-###CONCEPTOS FUNDAMENTALES DE DOCKER IMAGENES
+## IMAGENES
+### CONCEPTOS FUNDAMENTALES DE DOCKER IMAGENES
 Es como intenta solucionar los dos problemas restantes
->Construccion
->Distribución
->Las imagenes son plantillas a partir de las cuales se crean contenedores
+* Construccion
+* Distribución
+* Las imagenes son plantillas a partir de las cuales se crean contenedores
 Contiene todo lo necesario para que pueda correr normalmente como:
 * Dependencias 
 * Codigo
