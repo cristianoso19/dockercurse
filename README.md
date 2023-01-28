@@ -230,6 +230,7 @@ docker image ls
 > 😀Una imagen vive como un conjunto de archivos o "CAPAS"
 Para traer una imagen ejecutamos: 
 `docker pull ubuntu:20.04`
+
 ### CONSTRUYENDO UNA IMAGEN PROPIA
 El proceso de construcción se basa en el archivo llamada **DOCKERFILE**
 con el comando **build** construimos contenedores
@@ -244,5 +245,8 @@ Cada run genera una nueva capa **LAYER** que genera como resultado una **IDD**
 > Para retagear una imagen ejecuta: `docker tag ubuntu:platzi cristianoso19/ubuntu:platzi`
 Al retagear creamos un nombre de un LAYER, no crea una nueva imagen.
 <img src="https://i.ibb.co/JBL946b/Screenshot-at-Feb-05-15-26-18.png"/>
-### El sistema de capas
 
+### EL SISTEMA DE CAPAS
+Docker image es un conjunto de capas
+Para ver todo las capas
+`docker history ubuntu:platzi`
