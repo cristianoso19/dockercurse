@@ -247,6 +247,12 @@ Al retagear creamos un nombre de un LAYER, no crea una nueva imagen.
 <img src="https://i.ibb.co/JBL946b/Screenshot-at-Feb-05-15-26-18.png"/>
 
 ### EL SISTEMA DE CAPAS
-Docker image es un conjunto de capas
+Docker image es un conjunto de capas ordenadas, es fácil entender como esta hecha una imagen por su dockerfile y lo mejor es que las imagenes publicas tienen dockerfiles publicos 
+> 🙄 cada comando como RUN en el docker file crea una capa 
 Para ver todo las capas
 `docker history ubuntu:platzi`
+Para entender mejor como funciona las capas usar la herramienta dive:
+<a href="https://github.com/wagoodman/dive"> DIVE </a>
+> 🥃 Una capa es simplemente un cambio a la capa anterior, por consiguiente el tamaño de cada cambio es infimo.
+
+
