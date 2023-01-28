@@ -282,4 +282,17 @@ docker run --rm -p 3000:3000 platziapp
 docker ps #veo los contenedores activos
 ```
 Analisis del repositorio:
+
 <img src="https://static.platzi.com/media/user_upload/carbon%20%2813%29-61ed207f-53ce-4792-8c09-8fe7225679be.jpg" />
+
+### Aprovechando el caché de capas para estructurar correctamente tus imágenes
+Una de las herramientas que nos da docker para optimizar tiempo es 
+
+**LAYER CACHE**
+
+Si queremos crear una capa que tenemos en el sistema docker la usara en vez de construirla
+
+<img src="https://static.platzi.com/media/user_upload/dock9-1190f4d1-0a1e-4126-b422-fca6b894e286.jpg"/>
+
+### Docker networking: colaboración entre contenedores
+
