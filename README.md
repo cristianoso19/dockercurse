@@ -1,4 +1,4 @@
-# dockercurse
+# Curso de DOCKER
 This is the notes of docker curse at platzi
 ## Introducción
 ### Las tres areas en el desarrollo profesional de software
@@ -208,23 +208,24 @@ docker cp copytest:/testing localtesting
 >NO ES NECESARIO QUE EL CONTENEDOR ESTE CORRIENDO PARA COPIAR
 
 ## IMAGENES
-### CONCEPTOS FUNDAMENTALES DE DOCKER IMAGENES
-Es como intenta solucionar los dos problemas restantes
+### CONCEPTOS FUNDAMENTALES DE DOCKER: IMAGENES
+Es como DOCKER intenta solucionar los dos problemas restantes:
 * Construccion
 * Distribución
-* Las imagenes son plantillas a partir de las cuales se crean contenedores
+Las imagenes son plantillas a partir de las cuales se crean contenedores
 Contiene todo lo necesario para que pueda correr normalmente como:
 * Dependencias 
 * Codigo
 * Herramientas
 * Configuración
+<table><tr><td>Una imagen de docker se conforma de distintas capas de personalización, partiendo de la imagen base o `base image` que es la imagen de un SO</td></tr></table>
 ```bash
 #Repository: El repositorio que se usa al ejecutar docker run
 #Tag: version de la imagen, si no se especifica usa la "latest"
 #size: tamaño de la imagen
 docker image ls
-```Familia de Cristian Sacta
->Una imagen vive como un conjunto de archivos o "CAPAS"
+```
+> Una imagen vive como un conjunto de archivos o "CAPAS"
 Para traer una imagen ejecutamos: 
 * docker pull ubuntu:20.04
 
