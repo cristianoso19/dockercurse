@@ -353,6 +353,32 @@ services:
 
 > `docker compose up` Corre la configuracion del .dockerfile
 
+> `docker compose up -d` Corre la configuracion del .dockerfile sin detach
+
 > En YAML es muy importante el espaciado y tabulado.
 
+### Subcomandos de Docker Compose
+Docker compose crea un nombre único, basado en la carpeta que esta contenido el dockerfile.
+Lo hace para diferenciar a distintos containers de un mismo servicio
+Docker compose trabaja con servicios y no con containers
+Docker compose conecta todos los contenedores del mismo servicio a una red.
+
+```bash
+#Listar las redes.
+docker network ls 
+#Inspeccionamos detalles de red
+docker network inspect docker_default
+#Ver los logs
+docker-compose logs 
+#Ver solo logs de la app
+docker-compose logs app 
+#Hago un follow de los logs de app y db
+docker-compose logs -f app db
+#Entro a la shell del contenedor app
+docker-compose exec app bash 
+#Ver los contenedores generados por docker compose
+docker-compose ps 
+#Borrar todo lo generado por docker compose
+docker-compose down
+```
 <img src=""\>
