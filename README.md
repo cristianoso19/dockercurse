@@ -317,3 +317,42 @@ docker run -d -name app -p 3000:3000 --env MONGO_URL=mondodb://db:27017/test pla
   * Null: red para contenedores aislados
   * Bridge: red para redes locales dentro del pc
   * Host: red hacer como si fuese un equipo dentro de la LAN fisica
+
+## Docker compose
+### La herramienta todo en uno
+Lo que nos permite es describir de forma declarativa la arquitectura de servicios que nuestra necesita, como se comunican entre si o como se manejan archivos, todo esto en un archivo.
+
+Decimos que servicios tiene nuestra aplicacion y algunos parametros para pasarle.
+empieza con version, es la version del compose file.
+services: indica los servicios que componenen nuestra aplicacion. Pensando en microservicios.
+
+```bash
+# Versión del compose file
+version: "3.8"
+# Servicios que componen nuestra aplicación.
+## Un servicio puede estar compuesto por uno o más contenedores.
+services:
+# nombre del servicio.
+  app:
+  # Imagen a utilizar.
+    image: platziapp
+	# Declaración de variables de entorno.
+    environment:
+      MONGO_URL: "mongodb://db:27017/test"
+	# Indica que este servicio depende de otro, en este caso DB.
+	# El servicio app solo iniciara si el servicio debe inicia correctamente.
+    depends_on:
+      - db
+	# Puerto del contenedor expuesto.
+    ports:
+      - "3000:3000"
+
+  db:
+    image: mongo
+```
+
+> `docker compose up` Corre la configuracion del .dockerfile
+
+> En YAML es muy importante el espaciado y tabulado.
+
+<img src=""\>
