@@ -265,4 +265,21 @@ Para entender mejor como funciona las capas usar la herramienta dive:
 
 > 🥃 Una capa es simplemente un cambio a la capa anterior, por consiguiente el tamaño de cada cambio es infimo.
 
+## DOCKER COMO HERRRAMIENTA DE DESARROLLO
 
+### USANDO DOCKER PARA EL DESARROLLAR APLICACIONES
+
+Para ayudarnos descargar el siguiente repositorio:
+
+```bash
+git clone https://github.com/platzi/docker
+#Creamos la imagen local
+docker build -t platziapp . 
+#Muestra las imagenes locales
+docker image ls 
+#Creamos un contenedor y cuando se detenga se borra, lo expone en el puerto 3000
+docker run --rm -p 3000:3000 platziapp 
+docker ps #veo los contenedores activos
+```
+Analisis del repositorio:
+<img src="https://static.platzi.com/media/user_upload/carbon%20%2813%29-61ed207f-53ce-4792-8c09-8fe7225679be.jpg" />
