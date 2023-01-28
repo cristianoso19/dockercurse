@@ -295,4 +295,25 @@ Si queremos crear una capa que tenemos en el sistema docker la usara en vez de c
 <img src="https://static.platzi.com/media/user_upload/dock9-1190f4d1-0a1e-4126-b422-fca6b894e286.jpg"/>
 
 ### Docker networking: colaboración entre contenedores
+```bash
+#Listar redes de docker
+docker network ls 
+#Crear una nueva red de nombre platzinet
+docker network create --atachable plazinet 
+#Ver detalles de la red creada
+docker inspect plazinet 
+#Creamos otro contenedor llamado db
+docker run -d --name db mongo 
+#Conecto el contenedor db a la red platzinet
+docker network connect plazinet db 
+#Conecto el contenedor platziapp a la red platzinet
+docker network connect plazinet app 
+#Iniciamos el contenedor platziapp, le pasamos una variable de entorno con --env
+docker run -d -name app -p 3000:3000 --env MONGO_URL=mondodb://db:27017/test platzi 
+```
+>❕ Docker puede asignar una red al nombre de la imagen, no es necesario agregar la ip a la imagen
 
+>❕ Existen 3 tipos de red que maneja docker
+  * Null: red para contenedores aislados
+  * Bridge: red para redes locales dentro del pc
+  * Host: red hacer como si fuese un equipo dentro de la LAN fisica
