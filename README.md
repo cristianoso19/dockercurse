@@ -241,9 +241,13 @@ Contexto de build: a que parte del disco tiene acceso build mientras se essta ej
 Cada run genera una nueva capa **LAYER** que genera como resultado una **IDD**
 <img src="https://static.platzi.com/media/user_upload/carbon%20%283%29-975f4d64-9144-4a75-a8ba-0eceba66db50.jpg"/>
 <img src="https://static.platzi.com/media/user_upload/Screenshot%20from%202020-11-06%2019-53-30-a305c998-0991-44ad-9319-80cacb1a4bc7.jpg"/>
+
 > Para publicar un contenedor ejecutar: `docker push` pero antes retagear
+
 > Para retagear una imagen ejecuta: `docker tag ubuntu:platzi cristianoso19/ubuntu:platzi`
+
 Al retagear creamos un nombre de un LAYER, no crea una nueva imagen.
+
 <img src="https://i.ibb.co/JBL946b/Screenshot-at-Feb-05-15-26-18.png"/>
 
 ### EL SISTEMA DE CAPAS
