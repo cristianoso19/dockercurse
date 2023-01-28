@@ -218,7 +218,9 @@ Contiene todo lo necesario para que pueda correr normalmente como:
 * Codigo
 * Herramientas
 * Configuración
-<table><tr><td>Una imagen de docker se conforma de distintas capas de personalización, partiendo de la imagen base o `base image` que es la imagen de un SO</td></tr></table>
+
+<table><tr><td>Una imagen de docker se conforma de distintas capas de personalización, partiendo de la imagen base o BASE IMAGE que es la imagen de un SO</td></tr></table>
+
 ```bash
 #Repository: El repositorio que se usa al ejecutar docker run
 #Tag: version de la imagen, si no se especifica usa la "latest"
@@ -243,3 +245,4 @@ Cada run genera una nueva capa **LAYER** que genera como resultado una **IDD**
 Al retagear creamos un nombre de un LAYER, no crea una nueva imagen.
 <img src="https://i.ibb.co/JBL946b/Screenshot-at-Feb-05-15-26-18.png"/>
 ### El sistema de capas
+
