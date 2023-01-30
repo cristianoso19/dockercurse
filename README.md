@@ -351,11 +351,13 @@ services:
     image: mongo
 ```
 
-> `docker compose up` Corre la configuracion del .dockerfile
+> `docker-compose up` Corre la configuracion del .dockerfile
 
-> `docker compose up -d` Corre la configuracion del .dockerfile sin detach
+> `docker-compose up -d` Corre la configuracion del .dockerfile sin detach
 
 > En YAML es muy importante el espaciado y tabulado.
+
+<table><tr><td>⚠️**Despues de realizar CUALQUIER cambio en el DOCKERFILE o en el docker-compose.yml rebuildear la imagen con `docker-compose build`**</td></tr></table>
 
 ### Subcomandos de Docker Compose
 Docker compose crea un nombre único, basado en la carpeta que esta contenido el dockerfile.
