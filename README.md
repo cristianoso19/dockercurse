@@ -385,7 +385,37 @@ docker-compose down
 ```
 
 ### Docker Compose como herramienta de desarrollo
+Dentro del docker-compose.yml se puede mandar a buildear una imagen con `build: .` y luego ejecutar el comando `docker-compose build`
 
+Archivo docker-compose.yml
+```bash
+version: "3.8"
 
+services:
+  app:
+	# crea una imagen con los ficheros del directorio actual.
+    build: .
+    environment:
+      MONGO_URL: "mongodb://db:27017/test"
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+	# Sección para definir los bindmount.
+    volumes: 
+			#<local path>:<container path> # el directorio "<.>" actual   se montará en "/usr/src" en el contenedor.
+      - .:/usr/src
+			# indica que ficheros debe ignorar
+      - /usr/src/node_modules
+	# Permite pasarle un comando a ejecutar al servicio app.
+    command: npx nodemon  index.js
 
-<img src=""\>
+  db:
+    image: mongo
+```
+
+>El nombre que elige docker para esta imagen es el nombre del directorio-nombreaplicacion-numero, en este ejemplo quedaria asi: docker-app-1
+
+<table><tr><td>⚠️Podemos cambiar el comando del build en el archivo docker-compose.yml con el comando `command: npx nodemon -L index.js` </td></tr></table>
+
+<img src="https://static.platzi.com/media/user_upload/carbon%20%2822%29-a2940c20-5014-4af0-a654-39208e9879b6.jpg"\>
