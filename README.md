@@ -445,3 +445,45 @@ ports:
 ```
 
 Es una forma practica de simular problemas de concurrencia
+
+## Docker Avanzado
+
+### Administrando tu ambiente de docker
+
+Las imagenes van ocupando espacio, y consumen recursos, debemos hacer limpieza para no tener cosas que no deseamos.
+
+```bash
+#Ver los contedores en mi máquina
+docker ps -a 
+
+#Borra los contenedores inactivos
+docker container prune 
+
+#Borra todos los contenedores, activado o apagados
+docker rm -f $(docker ps -aq) 
+
+#Lista todas las redes
+docker network ls 
+
+#Lista todos los volumenes 
+docker volume ls 
+
+#Lista todas las imágenes
+docker image ls
+
+#Borra lo que no se este usando
+docker system prune 
+
+#Limitar el uso de memoria
+docker run -d --name app --memory 1g platziapp 
+
+#Ver stats de recursos consumidos por docker
+docker stats
+
+#Ver si el proceso muere por falta de recursos
+docker inspect app 
+
+```
+
+<img src="https://static.platzi.com/media/user_upload/carbon%20%2823%29-91140de2-d380-44ba-9175-c03284cecd51.jpg" />
+
