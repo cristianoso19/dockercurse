@@ -419,3 +419,29 @@ services:
 <table><tr><td>⚠️Podemos cambiar el comando del build en el archivo docker-compose.yml con el comando `command: npx nodemon -L index.js` </td></tr></table>
 
 <img src="https://static.platzi.com/media/user_upload/carbon%20%2822%29-a2940c20-5014-4af0-a654-39208e9879b6.jpg"\>
+ 
+### Compose en equipo: override
+Esto resuelve el problema de desarrollo en equipo.
+> compose override: sirve para personalizar pequeños cambios propios para nuestro ambiente sobre el compose file original.
+
+Existe la posibilidad que docker-compose trate de hacer un merge (una las configuraciones), ese es el caso de la variable environment que une las variables que esten dentro de esta, y si existe la sobreescribe.
+
+Los ports, son recomendables usarlos en un mismo archivo, no en los dos, genera un problema por que docker-compose lo compila en etapas distintas.
+
+Esta es otra forma de personalizar sin tener miedo de complicar la vida a nuestros compañeros de trabajo.
+
+>Es recomendable agregarlo al .gitignore
+
+### Escalabilidad
+
+`docker-compose up -d --scale app=2`
+
+Esto levanta dos contenedores de app en cada uno de los puertos.
+
+Para ejecutar esto antes debemos editar la parte de los puertos para esto se debe definir un rango de puertos
+```bash
+ports:
+  - "3000:3001:3000"
+```
+
+Es una forma practica de simular problemas de concurrencia
