@@ -487,3 +487,21 @@ docker inspect app
 
 <img src="https://static.platzi.com/media/user_upload/carbon%20%2823%29-91140de2-d380-44ba-9175-c03284cecd51.jpg" />
 
+### Deteniendo contenedores correctamente: SHELL vs EXEC
+
+Como docker se comunica con los procesos para terminarlos:
+1. Primero envia SIGNTERM es un stardard de linux
+2. Si no responde le envia una SIGNKILL apagando el proceso
+
+Para que el proceso corra como el proceso principal en el contenedor docker colocar en el dockerfile:
+`CMD ["/loop.sh"]`
+
+Para enviar un SIGNTERM con docker, con esto se realiza un gracefull shutdown
+
+`docker stop looper`
+
+Para enviar un KILLTERM con docker
+
+`docker kill looper`
+
+Esto es muy simple pero poderoso
