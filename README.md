@@ -529,3 +529,13 @@ docker run --name pinger ping <hostname>
 Esta es la manera mas facil de tener binarios autocontenidos que pueden correr en cualquier docker sin necesidad de instalarlos nativamente
 
 >Usar la forma de EXEC y no la de SHELL, no combinarlos, siempre una de las dos. 
+
+### El contexto de build
+
+Es cada vez que hacemos el build de una imagen, docker va a montar en un file system temporal todo los archivos disponibles en la ruta que se le pasa como último parametro en `docker build`.
+
+De esta manera se asegura de que dentro de un build el proceso no accedera a una parte no permitida.
+
+Esto puede generar el contexto de build sea muy grande. 
+
+El archivo .dockerignore podemos ignorar archivos o carpetas como si fuese .gitignore
