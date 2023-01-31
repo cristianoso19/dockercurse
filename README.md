@@ -539,3 +539,61 @@ De esta manera se asegura de que dentro de un build el proceso no accedera a una
 Esto puede generar el contexto de build sea muy grande. 
 
 El archivo .dockerignore podemos ignorar archivos o carpetas como si fuese .gitignore
+
+### Multi-stage build.
+
+Esto pasa en todos los proyectos grandes, no queremos que todo el codigo del proyecto este en la imagen final, especialmente en lenguajes compilados.
+
+¿Como hacemos para que este codigo no este en el buil final?
+
+Usamos dos archivos:
+* developer.Dockerfile, el mismo de toda la vida
+* production.Dockerfile, este lo vemos a continuacion
+```bash
+# Define una "stage" o fase llamada builder accesible para la siguiente fase
+FROM node:12 as builder
+# copiamos solo los archivos necesarios
+COPY ["package.json", "package-lock.json", "/usr/src/"]
+
+WORKDIR /usr/src
+# Instalamos solo las dependencias para Pro definidas en package.json
+RUN npm install --only=production
+
+COPY [".", "/usr/src/"]
+# instalamos dependencias de desarrollo
+RUN npm install --only=development
+
+# Pasamos los tests
+RUN npm run test
+## Esta imagen esta creada solo para pasar los tests.
+
+# Productive image
+FROM node:12
+
+COPY ["package.json", "package-lock.json", "/usr/src/"]
+
+WORKDIR /usr/src
+# instar las dependencias de PRO
+RUN npm install --only=production
+
+# Copiar  el fichero de la imagen anterior.
+# De cada stage se reutilizan las capas que son iguales.
+COPY --from=builder ["/usr/src/index.js", "/usr/src/"]
+# Pone accesible el puerto
+EXPOSE 3000
+
+CMD ["node", "index.js"]
+### En tiempo de build en caso de que algún paso falle, el build se detendrá por completo.
+```
+
+`docker build -t prodapp -f build/production.Dockerfile . `
+
+Al trabajar con el archivo production, tomamos como un script de integracion continua ya que cualquiera de los test falla se va a detener el proceso de build y no creara la imagen. Se optimiza las imagenes productivas en un solo docker file, reusando el cache de las capas para que se construya rapido, se encuentra en la mayoria de las imagenes productivas en proyectos reales. Es un concepto importante.
+
+### Docker-in-Docker
+
+Existe la forma de usar docker dentro de docker, concepto DOCKER IN DOCKER.
+
+`docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock docker`
+
+De esta manera montamos el sock de docker en el contenedor de docker, esto nos permite que dentro de la imagen podamos correr otros contenedores, haciendole una herramienta muy poderosa.
