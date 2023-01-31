@@ -505,3 +505,27 @@ Para enviar un KILLTERM con docker
 `docker kill looper`
 
 Esto es muy simple pero poderoso
+
+### Contenedores ejecutables: Entrypoint vs CMD
+
+Para ejecutar programas como si fuesen ejecutables dentro del sistema asemos uso de:
+
+>ENTRYPOINT: es el comando por defecto que correra siempre y usara comand como parametro del entrypoint.
+
+```bash
+#######Dockerfile#######
+FROM ubuntu:trusty
+ENTRYPOINT ["/bin/ping", "-c", "3"]
+CMD ["localhost"]
+########################
+
+```
+
+```bash
+#en este comando <hostname> pisa o reescribe el CMD del dockerfile de esta manera podremos ejecutar el comando ping desde un docker
+docker run --name pinger ping <hostname>
+```
+
+Esta es la manera mas facil de tener binarios autocontenidos que pueden correr en cualquier docker sin necesidad de instalarlos nativamente
+
+>Usar la forma de EXEC y no la de SHELL, no combinarlos, siempre una de las dos. 
